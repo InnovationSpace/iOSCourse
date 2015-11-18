@@ -34,6 +34,8 @@ class ViewController: UIViewController {
         containerView.addSubview(content.view)
         content.didMoveToParentViewController(self)
         
+        NSNotificationCenter.defaultCenter().postNotificationName("ChangedController", object: self, userInfo: ["controller":content])
+        
         currentViewController = content;
     }
     

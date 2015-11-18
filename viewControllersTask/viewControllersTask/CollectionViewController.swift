@@ -9,7 +9,13 @@ class CollectionViewController: UICollectionViewController {
 
         self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receivedNotification:", name: "ChangedController", object: nil)
+        
         NSLog("Collection view did load")
+    }
+    
+    func receivedNotification(notification: NSNotification) {
+        NSLog("Notification received %@", notification)
     }
     
     override func viewWillAppear(animated: Bool) {
