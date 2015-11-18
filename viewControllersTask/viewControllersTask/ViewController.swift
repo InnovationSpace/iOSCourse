@@ -1,5 +1,10 @@
 import UIKit
 
+let ControllerKey = "ControllerKey"
+let ScrollControllerId = "ScrollView"
+let CollectionControllerId = "CollectionView"
+
+
 class ViewController: UIViewController {
     
     @IBOutlet var containerView: UIView!
@@ -10,10 +15,17 @@ class ViewController: UIViewController {
     var currentViewController: UIViewController?;
     
     override func viewDidLoad() {
+
         scrollViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ScrollViewController")
         collectionViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CollectionViewController")
         
-        addControllerContent(scrollViewController)
+        let controllerID = NSUserDefaults.standardUserDefaults().valueForKey(ControllerKey)
+        
+        if (controllerID != nil && controllerID!.isEqualToString(ScrollControllerId)) {
+            addControllerContent(scrollViewController)
+        } else {
+            addControllerContent(collectionViewController)
+        }
     }
     
     private func addControllerContent(content: UIViewController) {
@@ -36,11 +48,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func scrollButtonTapped() {
+        NSUserDefaults.standardUserDefaults().setValue(ScrollControllerId, forKey: ControllerKey)
+        
         removeControllerContent(currentViewController)
         addControllerContent(scrollViewController)
     }
     
     @IBAction func collectionViewButtonTapped() {
+        NSUserDefaults.standardUserDefaults().setValue(CollectionControllerId, forKey: ControllerKey)
         removeControllerContent(currentViewController)
         addControllerContent(collectionViewController)
     }
