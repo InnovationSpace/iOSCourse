@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14E46" minimumToolsVersion="Automatic">
+    <entity name="Book" representedClassName=".Book" syncable="YES">
+        <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BookCategory" inverseName="books" inverseEntity="BookCategory" syncable="YES"/>
+    </entity>
+    <entity name="BookCategory" representedClassName=".BookCategory" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="category" inverseEntity="Book" syncable="YES"/>
+        <fetchedProperty name="bargainBooks" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Book" predicateString="SELF.price &lt; 12 AND (SELF.category=$FETCH_SOURCE)"/>
+        </fetchedProperty>
+    </entity>
+    <elements>
+        <element name="BookCategory" positionX="-54" positionY="-9" width="128" height="101"/>
+        <element name="Book" positionX="277" positionY="-225" width="128" height="88"/>
+    </elements>
+</model>
