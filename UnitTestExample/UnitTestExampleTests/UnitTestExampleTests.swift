@@ -3,4 +3,7 @@ import XCTest
 
 class UnitTestExampleTests: XCTestCase {
     
+    func testExample() {
+        
+    }
 }
